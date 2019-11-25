@@ -294,6 +294,10 @@ void DoScalarDependentDefinitions(py::module m, T) {
         m, "JointActuator", param, cls_doc.doc);
     BindMultibodyTreeElementMixin(&cls);
     cls  // BR
+        .def(py::init<const string&, const Joint<T>&, double>(),
+            py::arg("name"), py::arg("joint"),
+            py::arg("effort_limit") = std::numeric_limits<double>::infinity(),
+            cls_doc.ctor.doc_3args)
         .def("name", &Class::name, cls_doc.name.doc)
         .def("joint", &Class::joint, py_reference_internal, cls_doc.joint.doc);
   }
