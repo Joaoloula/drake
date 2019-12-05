@@ -200,6 +200,12 @@ void DoScalarDependentDefinitions(py::module m, T) {
               return self->AddJoint(std::move(joint));
             },
             py::arg("joint"), py_reference_internal, cls_doc.AddJoint.doc_1args)
+        .def("AddJointActuator",
+            [](Class * self, const std::string& name,
+               std::unique_ptr<Joint<T>> joint) -> auto& {
+              return self->AddJointActuator(name, std::move(joint));
+            },
+            py::arg("name"), py::arg("joint"), py_reference_internal, cls_doc.AddJointActuator.doc_2args)
         .def("AddFrame",
             [](Class * self, std::unique_ptr<Frame<T>> frame) -> auto& {
               return self->AddFrame(std::move(frame));
